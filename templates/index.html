@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Neurofox</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    </head>
+    <body>
+        <header>
+            <h1 class="title">Neuro<em style="color: rgb(75, 209, 226); font-style: normal;">fox</em></h1>
+            <p id="notification" hidden></p>
+        </header>
+        <section id=",main">
+           <div class="entry-modal" id="entry-modal">
+               <img id="logo" src="https://pbs.twimg.com/profile_images/1036896681084768256/8uoFWazR_400x400.jpg">
+               <p>Create or Join Meeting</p>
+               <input id="room-input" class="room-input" placeholder="Enter Room ID">
+                <input type="type" id="room-input2" class="room-input2" placeholder="Your name">
+                <div>
+                    <button onclick="createRoom()">Create Room</button>
+                    <button onclick="joinRoom()">Join Room</button>
+                </div>
+            </div>
+            <div class="meet-area">
+            <!-- Remote Video Element-->
+                <video id="remote-video" style="width: 600px; height: 500px; top: 40px; left: 40px; border-radius: 25px;"></video>
+            <!-- Local Video Element-->
+               <video id="local-video">Your browser does not support the video tag.</video>
+                        
+            </div>
+        </section>
+
+                 
+        
+    </body>
+
+    <script type='text/javascript' src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script type='text/javascript' src="{{ url_for('static', filename='script.js') }}"></script>
+    <script type="text/javascript">
+        //Selector for your <video> element
+        const video = document.querySelector('#local-video');
+    
+        //Core
+        window.navigator.mediaDevices.getUserMedia({ video: false})
+            .then(stream => {
+                video.srcObject = stream;
+                video.onloadedmetadata = (e) => {
+                    video.play();
+                };
+            })
+            .catch( () => {
+                alert('Browser is requesting the permission to run Webcam and mic ');
+            });
+    
+    </script>
+
+
+</html>

@@ -41,7 +41,7 @@
         const video = document.querySelector('#local-video');
     
         //Core
-        window.navigator.mediaDevices.getUserMedia({ video: false})
+        window.navigator.mediaDevices.getUserMedia({ video: True})
             .then(stream => {
                 video.srcObject = stream;
                 video.onloadedmetadata = (e) => {
